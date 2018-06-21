@@ -16,6 +16,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "lorem-ipsum": "^1.0.5",
     "mysql": "^2.15.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
