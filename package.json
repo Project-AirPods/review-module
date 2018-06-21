@@ -8,6 +8,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
+    "seed": "node database/data-generator.js && node database/data-generator.js && node database/data-generator.js && node database/data-generator.js && node database/data-generator.js",
     "react-dev": "webpack -d --watch",
     "serve": "node server/index.js",
     "test": "jest --forceExit --coverage"
@@ -16,6 +17,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "faker": "^4.1.0",
     "lorem-ipsum": "^1.0.5",
     "mysql": "^2.15.0",
     "react": "^16.4.0",

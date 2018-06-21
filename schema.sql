@@ -14,7 +14,7 @@ CREATE TABLE listings (
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(50) NOT NULL,
-  profile_pic_id INT NOT NULL,
+  avatar VARCHAR(256) NOT NULL,
   PRIMARY KEY (id)
 );
 
