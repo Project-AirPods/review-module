@@ -6,7 +6,7 @@ const faker = require('faker');
 const pool  = mysql.createPool(config);
 
 // Seed any table
-function seedTable(callback, numOfRows, table, fields, lastIteration, i, iterations) {
+function seedTable(callback, numOfRows, table, fields, i, iterations) {
 	pool.getConnection(function(err, connection) {
 
 		let rows = callback(numOfRows); 
@@ -19,13 +19,10 @@ function seedTable(callback, numOfRows, table, fields, lastIteration, i, iterati
 				process.exit();
 			}
 
-			if (lastIteration) {
-				if (i === iterations) {
-					console.log('Table seeded successfuly. Exiting node.');
-					process.exit();
-				}
+			if (i === iterations) {
+				console.log('Table seeded successfuly. Exiting node.');
+				process.exit();
 			}
-
 	  });
 	});
 }
@@ -40,31 +37,8 @@ function generateUsersRows(numOfRows) {
 
 function seedUsers() {
 	for (let i = 1; i <= 10; i++) {
-		seedTable(generateUsersRows, 200001, 'users', ['username', 'avatar'], true, i, 10);
+		seedTable(generateUsersRows, 200001, 'users', ['username', 'avatar'], i, 10);
 	}	
 }
 
 seedUsers();	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

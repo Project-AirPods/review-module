@@ -8,7 +8,9 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "seed": "node database/data-generator.js && node database/data-generator.js && node database/data-generator.js && node database/data-generator.js && node database/data-generator.js",
+    "seed-all-data": "npm run seed-listings && npm run seed-users",
+    "seed-listings": "node database/listings-generator.js",
+    "seed-users": "node database/users-generator.js && node database/users-generator.js && node database/users-generator.js && node database/users-generator.js && node database/users-generator.js",
     "react-dev": "webpack -d --watch",
     "serve": "node server/index.js",
     "test": "jest --forceExit --coverage"
