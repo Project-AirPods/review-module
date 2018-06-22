@@ -1,7 +1,5 @@
 const mysql = require('mysql');
 const config = require('./config');
-const loremIpsum = require('lorem-ipsum');
-const faker = require('faker');
 
 const pool  = mysql.createPool(config);
 
