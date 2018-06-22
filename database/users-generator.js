@@ -36,7 +36,7 @@ function generateUsersRows(numOfRows) {
 
 function seedUsers() {
 	for (let i = 1; i <= 10; i++) {
-		seedTable(generateUsersRows, 200001, 'users', ['username', 'avatar'], i, 10);
+		seedTable(generateUsersRows, 100001, 'users', ['username', 'avatar'], i, 10);
 	}	
 }
 

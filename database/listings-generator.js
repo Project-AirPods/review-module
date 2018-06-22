@@ -35,8 +35,8 @@ function generateListingsRows(numOfRows) {
 }
 
 function seedListings() {
-	for (let i = 1; i <= 10; i++) {
-		seedTable(generateListingsRows, 1000001, 'listings', [], i, 10);
+	for (let i = 1; i <= 1; i++) {
+		seedTable(generateListingsRows, 1000001, 'listings', [], i, 1);
 	}
 }
 

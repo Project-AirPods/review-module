@@ -31,11 +31,11 @@ function seedTable(callback, listingID, numOfRows, table, fields, i, iterations)
 function generateReviewsRows(listingID, numOfRows) {
 	let rows = [];
 
-	let reviewsRange = lodash.range(4, 16);
+	let reviewsRange = lodash.range(4, 11);
 
 	for (let i = 1; i < numOfRows; i++) {
 
-		let responseOwnerId = Math.ceil(Math.random() * 10000000);
+		let responseOwnerId = Math.ceil(Math.random() * 1000000);
 		let numOfReviews = reviewsRange[Math.floor(Math.random() * reviewsRange.length)];
 
 		for (let i = 1; i <= numOfReviews; i++) {
@@ -47,14 +47,14 @@ function generateReviewsRows(listingID, numOfRows) {
 			let ratingCheckin = Math.ceil(Math.random() * 5);
 			let ratingValue = Math.ceil(Math.random() * 5);
 
-			let reviewUserId = Math.ceil(Math.random() * 10000000);
+			let reviewUserId = Math.ceil(Math.random() * 1000000);
 			let reviewBody = loremIpsum({
 				count: 1,                       // Number of words, sentences, or paragraphs to generate.
   			units: 'paragraphs',            // Generate words, sentences, or paragraphs.
-  			sentenceLowerBound: 3,          // Minimum words per sentence.
-  			sentenceUpperBound: 9,         	// Maximum words per sentence.
-  			paragraphLowerBound: 3,         // Minimum sentences per paragraph.
-  			paragraphUpperBound: 7,	        // Maximum sentences per paragraph.
+  			sentenceLowerBound: 2,          // Minimum words per sentence.
+  			sentenceUpperBound: 5,         	// Maximum words per sentence.
+  			paragraphLowerBound: 2,         // Minimum sentences per paragraph.
+  			paragraphUpperBound: 5,	        // Maximum sentences per paragraph.
   			format: 'plain',                // Plain text or html
 			});
 			let reviewDate = faker.date.recent();
