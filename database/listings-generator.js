@@ -2,36 +2,24 @@
 // const numCPUs = require('os').cpus().length;
 const pgp = require('pg-promise')();
 
-const config = {
-    host: 'localhost',
-    port: 5432,
-    database: 'airpods_reviews',
-    user: 'ruslanfarutdinov',
-};
+const db = pgp('http://localhost:5432/airpods_reviews');
 
-const db = pgp(config);
+// db.tx(t => {
 
+//     const queries = rows.map(row => {
+//       return t.none('INSERT INTO listings(id) VALUES(${id})', row);
+//     });
+//     return t.batch(queries);
+//   })
+//     .then(data => {
+//       console.log('Table seeded successfuly. Exiting process.');
+//       process.exit();
+//     })
+//     .catch(error => {
+//       console.log(`FAILED TO INSERT INTO DB: ${err}`);  
+//       process.exit();
 
-let rows = [ {id: 1}, {id: 2}, {id: 3} ];
-
-db.tx(t => {
-  const queries = rows.map(row => {
-    return t.none(`INSERT INTO listings(id) VALUES(${id})`, row);
-  });
-  return t.batch(queries);
-})
-	.then(data => {
-		console.log(`FAILED TO INSERT INTO DB: ${err}`);	
-		process.exit();
-    // SUCCESS
-    // data = array of null-s
-	})
-	.catch(error => {
-	  console.log('Table seeded successfuly. Exiting process.');
-		process.exit();
-    // ERROR
-	});
-
+//     });
 
 // const { Client } = require('pg');
 // const client = new Client('http://localhost:5432/airpods_reviews');
@@ -76,22 +64,42 @@ db.tx(t => {
 // 	});
 // }
 
+const cs = new pgp.helpers.ColumnSet(['id'], {table: 'listings'});
 
-// function generateListingsRows(numOfRows) {
-// 	let rows = [];
-// 	for (let i = 1; i < numOfRows; i++) {
-// 		rows.push([]);
-// 	}
-// 	return rows;
-// }
+function seedTable(callback, numOfRows, i, iterations) {
+  const rows = callback(numOfRows);
+  const query = pgp.helpers.insert(rows, cs);
 
-// function seedListings() {
-// 	for (let i = 1; i <= 4; i++) {
-// 		seedTable(generateListingsRows, 2500001, 'listings', [], i, 4);
-// 	}
-// }
+  db.none(query)
+    .then(data => {
+      if (i === iterations) {
+        console.log('Table seeded successfuly. Exiting process.');
+        process.exit();
+      }
+    })
+    .catch(error => {
+      console.log(`FAILED TO INSERT INTO DB: ${err}`);
+      process.exit();
+    });
 
-// // seedListings();
+}
+
+
+function generateListingsRows(numOfRows) {
+	let rows = [];
+	for (let i = 1; i < numOfRows; i++) {
+		rows.push({id: i});
+	}
+	return rows;
+}
+
+function seedListings() {
+  for (let i = 1; i <= 4; i++) {
+	  seedTable(generateListingsRows, 1000001, i, 4);
+	}
+}
+
+seedListings();
 
 // function createWorkers() {
 // 	for (let i = 0; i < numCPUs; i++) {
@@ -100,8 +108,6 @@ db.tx(t => {
 // 	console.log(`${numCPUs} workers created.`);
 // 	// process.exit();
 // }
-
-// seedListings();
 
 // create workers or seed the database.
 // if (cluster.isMaster) {

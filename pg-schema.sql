@@ -1,12 +1,11 @@
 DROP DATABASE IF EXISTS airpods_reviews;
 
 CREATE DATABASE airpods_reviews;
-GRANT ALL PRIVILEGES ON DATABASE airpods_reviews TO sdc;
 
 \connect airpods_reviews;
 
 CREATE TABLE listings (
-  id SERIAL NOT NULL PRIMARY KEY
+  id INTEGER NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE users (
