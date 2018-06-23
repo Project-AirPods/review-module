@@ -3,6 +3,8 @@ const config = require('./config');
 const loremIpsum = require('lorem-ipsum');
 const faker = require('faker');
 const lodash = require('lodash');
+const cluster = require('cluster');
+const numCPUs = require('os').cpus().length;
 
 const pool  = mysql.createPool(config);
 

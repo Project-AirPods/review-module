@@ -15,7 +15,7 @@
     "seed-reviews2": "node database/reviews-generator.js && node database/reviews-generator.js && node database/reviews-generator.js && node database/reviews-generator.js && node database/reviews-generator.js && node database/reviews-generator.js && node database/reviews-generator.js && node database/reviews-generator.js && node database/reviews-generator.js && node database/reviews-generator.js",
     "react-dev": "webpack -d --watch",
     "serve": "node server/index.js",
-    "test": "jest --forceExit --coverage",
+    "test": "jest --forceExit --coverage"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -25,6 +25,8 @@
     "lodash": "^4.17.10",
     "lorem-ipsum": "^1.0.5",
     "mysql": "^2.15.0",
+    "pg": "^7.4.3",
+    "pg-promise": "^8.4.4",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "styled-components": "^3.3.2"
