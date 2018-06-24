@@ -25,3 +25,6 @@ build/
 dist/
 public/bundle.js
 public/bundle-reviews.js
+
+# All generated dummy data
+data/
