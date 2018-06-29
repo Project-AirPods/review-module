@@ -5,6 +5,7 @@ const { getOverview } = require('../database/index.js');
 const { getReviews } = require('../database/index.js');
 const { postReview } = require('../database/index.js');
 const { updateReview } = require('../database/index.js');
+const { deleteReview } = require('../database/index.js');
 
 const app = express();
 
@@ -78,6 +79,19 @@ app.put('/listings/:listingId', (req, res) => {
 			console.log(`Error updating review: ${err}`);
 		}	
 		res.status(204).end();
+	});
+});
+
+// delete an existing review
+app.delete('/listings/:listingId', (req, res) => {
+	const conditions = {listingId: Number(req.params.listingId), reviewUserId: req.body.reviewUserId};
+
+	deleteReview(conditions, (err) => {
+		if (err) {
+			console.log(`Error deleting a review: ${err}`);
+			res.status(404).send(`Error deleting a review: ${err}`);
+		}
+		res.status(204).send();
 	});
 });
 

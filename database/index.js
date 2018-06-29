@@ -124,9 +124,16 @@ function postReview(reviewDetails, callback) {
 
 }
 
+// update an existing review
 function updateReview(conditions, update, callback) {
 	Review.update(conditions, update, (err, data) => {
 		callback(err, data);
+	});
+}
+
+function deleteReview(conditions, callback) {
+	Review.deleteOne(conditions, (err) => {
+		callback(err);
 	});
 }
 
@@ -134,3 +141,4 @@ module.exports.getOverview = getOverview;
 module.exports.getReviews = getReviews;
 module.exports.postReview = postReview;
 module.exports.updateReview = updateReview;
+module.exports.deleteReview = deleteReview;
