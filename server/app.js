@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { getOverview } = require('../database/index.js');
 const { getReviews } = require('../database/index.js');
+const { postReview } = require('../database/index.js');
 
 const app = express();
 
@@ -49,6 +50,24 @@ app.get('/listings/:listingId/reviews', (req, res) => {
 
 // add a new review
 app.post('/listings/:listingId', (req, res) => {
+	// console.log(`listingId: ${listingId} AND userId: ${userId}`);
+	// console.log(`listingId type: ${typeof listingId} AND userId type: ${typeof userId}`);
+
+	req.body.listingId = Number(req.params.listingId);
+	
+	postReview(req.body, (err, userIsFound, docs) => {
+		if (err) {
+			console.log(`Error retrieving user data: ${err}`);
+			res.status(500).end(`Error retrieving user from database: ${err}`);
+		}
+
+		if (userIsFound) {
+			res.status(201).end('Successfully inserted review into database.');
+		} else {
+			console.log('Nothing under that userId found.');
+			res.status(404).end('User associated with review was not found.');
+		}
+	});
 
 });
 

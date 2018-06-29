@@ -87,9 +87,43 @@ function getReviews(listingId, callback) {
 	);
 }
 
-function postReviews(listingId, userId, callback) {
+// Insert a review to the db
+function postReview(reviewDetails, callback) {
+	
+	// check if the userId exists in the db to prevent a bad record from being inserted
+	User.find({id: reviewDetails.reviewUserId}, (err, docs) => {
+		if (err) {	
+			callback(err, null, null);
+		}
+
+		if (docs.length > 0) {
+			// write a review to reviews
+			const review = new Review({ 
+				listingId: reviewDetails.listingId,
+
+				ratingAccuracy: reviewDetails.ratingAccuracy,
+				ratingCommunication: reviewDetails.ratingCommunication,
+				ratingCleanliness: reviewDetails.ratingCleanliness,
+				ratingLocation: reviewDetails.ratingLocation,
+				ratingCheckin: reviewDetails.ratingCheckin,
+				ratingValue: reviewDetails.ratingValue,
+
+				reviewUserId: reviewDetails.reviewUserId,
+				reviewBody: reviewDetails.reviewBody,
+				reviewDate: reviewDetails.reviewDate,
+			});
+
+			review.save((err, review) => {
+				callback(err, true, review);
+			});
+			
+		} else {
+			callback(null, false, docs);
+		}
+	});
 
 }
 
 module.exports.getOverview = getOverview;
 module.exports.getReviews = getReviews;
+module.exports.postReview = postReview;
