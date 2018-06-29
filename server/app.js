@@ -22,12 +22,6 @@ app.get('/listings/:listingId/overviews', (req, res) => {
 			console.log(`Error retrieving the doc: ${err}`);
 			res.status(500).end();
 		} else {
-			
-			console.log('Here is the doc:');
-			docs.forEach((doc) => {
-				console.log(doc);
-			});
-
 			res.header('Access-Control-Allow-Origin', '*');
       res.status(200);
       res.send(docs);			
@@ -45,12 +39,6 @@ app.get('/listings/:listingId/reviews', (req, res) => {
 			console.log(`Error retrieving the doc: ${err}`);
 			res.status(500).end();
 		} else {
-			
-			console.log('Here is the doc:');
-			docs.forEach((doc) => {
-				console.log(doc);
-			});
-
 			res.header('Access-Control-Allow-Origin', '*');
       res.status(200);
       res.send(docs);
