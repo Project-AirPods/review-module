@@ -124,6 +124,13 @@ function postReview(reviewDetails, callback) {
 
 }
 
+function updateReview(conditions, update, callback) {
+	Review.update(conditions, update, (err, data) => {
+		callback(err, data);
+	});
+}
+
 module.exports.getOverview = getOverview;
 module.exports.getReviews = getReviews;
 module.exports.postReview = postReview;
+module.exports.updateReview = updateReview;

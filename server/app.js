@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const { getOverview } = require('../database/index.js');
 const { getReviews } = require('../database/index.js');
 const { postReview } = require('../database/index.js');
+const { updateReview } = require('../database/index.js');
 
 const app = express();
 
@@ -50,9 +51,6 @@ app.get('/listings/:listingId/reviews', (req, res) => {
 
 // add a new review
 app.post('/listings/:listingId', (req, res) => {
-	// console.log(`listingId: ${listingId} AND userId: ${userId}`);
-	// console.log(`listingId type: ${typeof listingId} AND userId type: ${typeof userId}`);
-
 	req.body.listingId = Number(req.params.listingId);
 	
 	postReview(req.body, (err, userIsFound, docs) => {
@@ -67,6 +65,18 @@ app.post('/listings/:listingId', (req, res) => {
 			console.log('Nothing under that userId found.');
 			res.status(404).end('User associated with review was not found.');
 		}
+	});
+});
+
+// update an existing review
+app.put('/listings/:listingId', (req, res) => {
+	// identify a review to update by listing id, then by user id
+	updateReview({listingId: 1000089, reviewUserId: 1056731}, {responseBody: 'Hlab hlab hlab.'}, (err, data) => {
+		if (err) {
+			console.log(`Error: ${err}`);
+		}	
+		console.log(`Successfully updated review: ${data}`);
+		res.status(204).end('Success updating review.');
 	});
 
 });
