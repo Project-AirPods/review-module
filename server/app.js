@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const { getOverview } = require('../database/mongoose.js');
-const { getReviews } = require('../database/mongoose.js');
+const { getOverview } = require('../database/index.js');
+const { getReviews } = require('../database/index.js');
 
 const app = express();
 
