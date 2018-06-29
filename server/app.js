@@ -70,15 +70,15 @@ app.post('/listings/:listingId', (req, res) => {
 
 // update an existing review
 app.put('/listings/:listingId', (req, res) => {
-	// identify a review to update by listing id, then by user id
-	updateReview({listingId: 1000089, reviewUserId: 1056731}, {responseBody: 'Hlab hlab hlab.'}, (err, data) => {
-		if (err) {
-			console.log(`Error: ${err}`);
-		}	
-		console.log(`Successfully updated review: ${data}`);
-		res.status(204).end('Success updating review.');
-	});
+	const conditions = {listingId: Number(req.params.listingId), reviewUserId: req.body.reviewUserId};
+	const update = req.body;
 
+	updateReview(conditions, update, (err, data) => {
+		if (err) {
+			console.log(`Error updating review: ${err}`);
+		}	
+		res.status(204).end();
+	});
 });
 
 module.exports = app;
