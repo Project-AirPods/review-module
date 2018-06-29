@@ -36,14 +36,14 @@ const StarsBoxer = styled.div`
 
 const Overview = (props) => {
 
-  const accuracy = Math.ceil(props.stats.avg_accuracy);
-  const checkin = Math.ceil(props.stats.avg_checkin);
-  const cleanliness = Math.ceil(props.stats.avg_cleanliness);
-  const communication = Math.ceil(props.stats.avg_communication);
-  const location = Math.ceil(props.stats.avg_location);
-  const value = Math.ceil(props.stats.avg_value);
+  const accuracy = Math.ceil(props.stats.avgAccuracy);
+  const checkin = Math.ceil(props.stats.avgCheckin);
+  const cleanliness = Math.ceil(props.stats.avgCleanliness);
+  const communication = Math.ceil(props.stats.avgCommunication);
+  const location = Math.ceil(props.stats.avgLocation);
+  const value = Math.ceil(props.stats.avgValue);
   
-  const totalReviews = props.stats.total_reviews;
+  const totalReviews = props.stats.totalReviews;
   const overview = Math.floor((accuracy + checkin + cleanliness + communication + 
     location + value) / (6));
 

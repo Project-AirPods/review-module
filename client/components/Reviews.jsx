@@ -53,9 +53,9 @@ const Reviews = (props) => {
 
       var response;
 
-      if (review.response_date) {
-        response = <Response body={review.response_body} url={review.host_pic_url}
-          name={review.host_username} date={review.response_date}/>;
+      if (review.responseDate) {
+        response = <Response body={review.responseBody} url={review.hostResponse[0].avatar}
+          name={review.hostResponse[0].username} date={review.responseDate}/>;
       }
 
       return (
@@ -63,19 +63,19 @@ const Reviews = (props) => {
           <div>
 
             <ReviewHeader>
-              <ProfilePic src={review.user_pic_url}></ProfilePic>
+              <ProfilePic src={review.userReview[0].avatar}></ProfilePic>
               <div>
-                <Username>{review.review_username}</Username>
-                <ReviewDate>{review.review_date}</ReviewDate>
+                <Username>{review.userReview[0].username}</Username>
+                <ReviewDate>{review.reviewDate}</ReviewDate>
               </div>
             </ReviewHeader>
 
             <StarDiv>
-              <Stars rating={Math.ceil(review.avg_rating)}/>
+              <Stars rating={Math.ceil(review.avgRating)}/>
             </StarDiv>
 
             <div>
-              <ReviewBody>{review.review_body}</ReviewBody>
+              <ReviewBody>{review.reviewBody}</ReviewBody>
               {response}
             </div>
           </div>

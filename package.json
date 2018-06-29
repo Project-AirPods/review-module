@@ -13,10 +13,9 @@
     "test": "jest --forceExit --coverage",
     "generate-data": "node database/listings-generator.js && node database/users-generator.js && node database/reviews-generator.js",
     "seed-pg": "psql postgres < database/pg-schema.sql",
-    "seed-mongo": "npm run seed-mongo-listings && npm run seed-mongo-users && npm run seed-mongo-reviews",
-    "seed-mongo-listings": "mongoimport -d airpods_reviews -c listings -f id --type csv --file ./data/listings.csv --ignoreBlanks",
+    "seed-mongo": "npm run seed-mongo-users && npm run seed-mongo-reviews",
     "seed-mongo-users": "mongoimport -d airpods_reviews -c users -f id,username,avatar --type csv --file ./data/users.csv --ignoreBlanks",
-    "seed-mongo-reviews": "mongoimport -d airpods_reviews -c reviews -f listing_id,rating_accuracy,rating_communication,rating_cleanliness,rating_location,rating_checkin,rating_value,review_user_id,review_body,review_date,response_date,response_owner_id,response_body --type csv --file ./data/reviews.csv --ignoreBlanks"
+    "seed-mongo-reviews": "mongoimport -d airpods_reviews -c reviews -f listingId,ratingAccuracy,ratingCommunication,ratingCleanliness,ratingLocation,ratingCheckin,ratingValue,reviewUserId,reviewBody,reviewDate,responseDate,responseOwnerId,responseBody --type csv --file ./data/reviews.csv --ignoreBlanks"
   },
   "dependencies": {
     "axios": "^0.18.0",
