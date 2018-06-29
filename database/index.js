@@ -87,5 +87,9 @@ function getReviews(listingId, callback) {
 	);
 }
 
+function postReviews(listingId, userId, callback) {
+
+}
+
 module.exports.getOverview = getOverview;
 module.exports.getReviews = getReviews;
