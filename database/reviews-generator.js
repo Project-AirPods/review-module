@@ -38,11 +38,11 @@ const generateListings = (writer) => {
         paragraphUpperBound: 7,         // Maximum sentences per paragraph.
         format: 'plain',                // Plain text or html
       }) : 
-      null;
-      let responseDate = responseBody ? faker.date.month() + ' 2018' : null;
-      let responseOwnerId = responseBody ? Math.ceil(Math.random() * 10000000) : null;
+      '';
+      let responseDate = responseBody ? faker.date.month() + ' 2018' : '';
+      let responseOwnerId = responseBody ? Math.ceil(Math.random() * 10000000) : '';
 
-    let data = `${id}, ${ratingAccuracy}, ${ratingCommunication}, ${ratingCleanliness}, ${ratingLocation}, ${ratingCheckin}, ${ratingValue}, ${reviewUserId}, ${reviewBody}, ${reviewDate}, ${responseDate}, ${responseOwnerId}, ${responseBody}\n`; 
+    let data = `${id},${ratingAccuracy},${ratingCommunication},${ratingCleanliness},${ratingLocation},${ratingCheckin},${ratingValue},${reviewUserId},${reviewBody},${reviewDate},${responseDate},${responseOwnerId},${responseBody}\n`; 
                 
     id += 1;
     return data;

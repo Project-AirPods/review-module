@@ -36,4 +36,4 @@ CREATE TABLE reviews (
 
 COPY listings (id) FROM '/Users/ruslanfarutdinov/Desktop/hr96/sdc/review-module/data/listings.csv' with delimiter as ',' csv;
 COPY users (id, username, avatar) FROM '/Users/ruslanfarutdinov/Desktop/hr96/sdc/review-module/data/users.csv' with delimiter as ',' csv;
-COPY reviews (listing_id, rating_accuracy, rating_communication, rating_cleanliness, rating_location, rating_checkin, rating_value, review_user_id, review_body, review_date, response_date, response_owner_id, response_body) FROM '/Users/ruslanfarutdinov/Desktop/hr96/sdc/review-module/data/reviews.csv' with delimiter as ',' NULL AS ' null' csv;
+COPY reviews (listing_id, rating_accuracy, rating_communication, rating_cleanliness, rating_location, rating_checkin, rating_value, review_user_id, review_body, review_date, response_date, response_owner_id, response_body) FROM '/Users/ruslanfarutdinov/Desktop/hr96/sdc/review-module/data/reviews.csv' with delimiter as ',' NULL AS '' csv;

@@ -8,7 +8,7 @@ const generateListings = (writer) => {
   let id = 1;
   
   const generate = () => {
-    let data = `${id}, ${faker.name.firstName()}, ${faker.image.avatar()}\n`; 
+    let data = `${id},${faker.name.firstName()},${faker.image.avatar()}\n`; 
     id += 1;
     return data;
   }
