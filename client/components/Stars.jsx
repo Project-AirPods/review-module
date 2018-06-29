@@ -66,5 +66,3 @@ const Stars = (props) => {
 };
 
 export default Stars;
-
-

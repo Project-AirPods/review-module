@@ -28,8 +28,9 @@ class App extends React.Component {
   }
 
   getOverview(id) {
-    axios.get(`/listings/${id}/overviews`)
+    axios.get(`http://localhost:3003/listings/${id}/overviews`)
       .then((response) => {
+        console.log(response.data[0]);
         this.setState({stats: response.data[0]});
       })
       .catch((err) => {
@@ -38,8 +39,9 @@ class App extends React.Component {
   }
 
   getReviews(id) {
-    axios.get(`/listings/${id}/reviews`)
+    axios.get(`http://localhost:3003/listings/${id}/reviews`)
       .then((response) => {
+        console.log(response.data);
         this.setState({reviews: response.data});
       })
       .catch((err) => {

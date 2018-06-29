@@ -1,14 +1,3 @@
-const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/airpods_reviews');
-const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  // we're connected!
-});
-
-
 const mysql = require('mysql');
 const config = require('./config');
 
