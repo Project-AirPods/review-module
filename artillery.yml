@@ -1,0 +1,13 @@
+config:
+  target: "http://localhost:3003"
+  phases:
+    - duration: 60
+      arrivalRate: 100 
+scenarios:
+  - flow:
+    - loop:
+      - get:
+          url: "/listings/1034/overviews"
+      - get:
+          url: "/listings/1034/reviews" 
+      count: 10

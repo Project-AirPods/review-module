@@ -43,6 +43,7 @@ const Review = mongoose.model('Review', reviewsSchema);
 
 // Get the overview data from the database 
 function getOverview(listingId, callback) {
+	console.log('Hitting the db!');
 	Review.aggregate([ 
 		{$match: {listingId: listingId}}, 
 		{$group: {
@@ -64,6 +65,7 @@ function getOverview(listingId, callback) {
 
 // Get the reviews data from the database
 function getReviews(listingId, callback) {
+	console.log('Hitting the db!');
 	Review.aggregate([ 
 			{$match: {listingId: listingId}}, 
 			{$lookup: {from: "users", localField: "reviewUserId", foreignField: "id", as: "userReview"}},
