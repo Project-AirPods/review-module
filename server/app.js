@@ -6,6 +6,8 @@ const { getReviews } = require('../database/index.js');
 const { postReview } = require('../database/index.js');
 const { updateReview } = require('../database/index.js');
 const { deleteReview } = require('../database/index.js');
+const { checkCache } = require('../database/redis.js');
+const { addToCache } = require('../database/redis.js');
 
 const app = express();
 
@@ -20,16 +22,40 @@ app.use('/listings/:id', express.static(path.join(__dirname, '/../public')));
 app.get('/listings/:listingId/overviews', (req, res) => {
   
   const listingId = Number(req.params.listingId);
-	getOverview(listingId, (err, docs) => {
-		if (err) {
-			console.log(`Error retrieving the doc: ${err}`);
-			res.status(500).end();
-		} else {
-			res.header('Access-Control-Allow-Origin', '*');
-      res.status(200);
-      res.send(docs);			
-		}
-	});
+  const query = 'overviews' + listingId;
+
+  checkCache(query, (err, reply) => {
+  	if (err) {
+  		console.log(`Error retrieving data from REDIS: ${err}`);
+  		res.status(500).end();
+  	} 
+
+  	// if cache doesn't have the review, fetch it from mongo, add it to cache, then send it to client 
+  	if (reply === null) {
+			getOverview(listingId, (err, docs) => {
+				if (err) {
+					console.log(`Error retrieving the doc from Mongo: ${err}`);
+					res.status(500).end();
+				} else {
+					addToCache(query, JSON.stringify(docs), (err, reply) => {
+						if (err) {
+							console.log(`Error adding a review to REDIS: ${err}`);
+						}
+					});
+
+					console.log('got it from database');
+					res.header('Access-Control-Allow-Origin', '*');
+		      res.status(200);
+		      res.send(docs);			
+				}
+			});
+  	} else {
+  		console.log('got it from cache');
+  		res.header('Access-Control-Allow-Origin', '*');
+			res.status(200);
+		  res.send(JSON.parse(reply));			
+  	}
+  });
 
 });
 
@@ -37,16 +63,40 @@ app.get('/listings/:listingId/overviews', (req, res) => {
 app.get('/listings/:listingId/reviews', (req, res) => {
 
 	const listingId = Number(req.params.listingId);
-	getReviews(listingId, (err, docs) => {
-		if (err) {
-			console.log(`Error retrieving the doc: ${err}`);
-			res.status(500).end();
-		} else {
-			res.header('Access-Control-Allow-Origin', '*');
-      res.status(200);
-      res.send(docs);
-		}
-	}); 
+	const query = 'reviews' + listingId;
+
+	checkCache(query, (err, reply) => {
+  	if (err) {
+  		console.log(`Error retrieving data from REDIS: ${err}`);
+  		res.status(500).end();
+  	} 
+
+  	// if cache doesn't have the review, fetch it from mongo, add it to cache, then send it to client 
+  	if (reply === null) {
+			getReviews(listingId, (err, docs) => {
+				if (err) {
+					console.log(`Error retrieving the doc from Mongo: ${err}`);
+					res.status(500).end();
+				} else {
+					addToCache(query, JSON.stringify(docs), (err, reply) => {
+						if (err) {
+							console.log(`Error adding a review to REDIS: ${err}`);
+						}
+					});
+
+					console.log('got it from database');
+					res.header('Access-Control-Allow-Origin', '*');
+		      res.status(200);
+		      res.send(docs);			
+				}
+			});
+  	} else {
+  		console.log('got it from cache');
+  		res.header('Access-Control-Allow-Origin', '*');
+			res.status(200);
+		  res.send(JSON.parse(reply));			
+  	}
+  });
 
 });
 
