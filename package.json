@@ -23,6 +23,7 @@
     "express": "^4.16.3",
     "faker": "^4.1.0",
     "lorem-ipsum": "^1.0.5",
+    "mongodb": "^3.1.0",
     "mongoose": "^5.1.6",
     "mysql": "^2.15.0",
     "react": "^16.4.0",

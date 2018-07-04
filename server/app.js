@@ -85,6 +85,7 @@ app.get('/listings/:listingId/reviews', (req, res) => {
 					});
 
 					console.log('got it from database');
+					console.log(docs);
 					res.header('Access-Control-Allow-Origin', '*');
 		      res.status(200);
 		      res.send(docs);			
